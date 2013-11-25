@@ -1,0 +1,22 @@
+---
+# These tasks will try to aquire all packages listed in $packages variable.
+- name: Obtain source using approprate vcs
+  action: "{{item.vcs}} repo={{item.url}} dest={{item.dest}}"
+  when: item.vcs is defined
+  with_items: $packages
+
+- name: Obtain source by downloading a bundle and checking sha
+  get_url: url={{item.url}} dest={{item.cache}} sha256sum={{item.sha}}
+  when: item.bundle is defined and item.sha is defined
+  with_items: $packages
+
+- name: Obtain source by downloading a bundle
+  get_url: url={{item.url}} dest={{item.cache}}
+  when: item.bundle is defined
+  with_items: $packages
+
+- name: Extract downloaded bundles
+  unarchive: src={{item.cache}} dest={{item.dest}}
+  when: item.bundle is defined
+  with_items: $packages
+

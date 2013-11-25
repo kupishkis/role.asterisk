@@ -1,0 +1,72 @@
+---
+- name: Ensure asterisk build dependancies are met
+  sudo: yes
+  apt: pkg={{item}} state=present
+  with_items: packages
+  tags:
+    - build
+
+- name: Ensure current kernel headers exist
+  sudo: yes
+  apt: pkg=linux-headers-{{ ansible_kernel }} state=latest
+  tags:
+    - build
+
+- name: Ensure build directories exists
+  sudo: yes
+  file: path={{item}} owner={{asterisk_user}} group={{asterisk_group}} recurse=yes state=directory
+  with_items:
+    - $source_dir
+    - $cache_dir
+  tags:
+    - build
+
+- { include: aquire.yml,  packages: $asterisk_packages, tags: [build] }
+- { include: build.yml,   packages: $asterisk_packages, tags: [build] }
+
+- name: Do ldconfig
+  shell: sudo ldconfig
+  tags:
+    - build
+
+- name: Fix DAHDI configs
+  sudo: yes
+  lineinfile: dest=/etc/udev/rules.d/dahdi.rules regexp="^SUBSYSTEM==\"dahdi\"" line="SUBSYSTEM==\"dahdi\", OWNER=\"{{asterisk_user}}\", GROUP=\"{{asterisk_group}}\", MODE=\"0660\"" state=present
+  tags:
+    - build
+
+- name: Ensure Asterisk directories exist
+  sudo: yes
+  file: path={{item}} state=directory owner={{asterisk_user}} group={{asterisk_group}} recurse=yes
+  with_items:
+    - /usr/lib/asterisk
+    - /var/lib/asterisk
+    - /var/spool/asterisk
+    - /var/log/asterisk
+    - /var/run/asterisk
+    - /etc/asterisk
+  tags:
+    - build
+
+- name: Ensure asterisk is executable
+  sudo: yes
+  file: path=/usr/sbin/asterisk state=file owner={{asterisk_user}} group={{asterisk_group}}
+  tags:
+    - build
+
+- name: Ensure odbc.ini is correct
+  sudo: yes
+  template: dest=/etc/{{item}} src={{item}}.j2
+  with_items:
+    - odbc.ini
+  tags:
+    - build
+    - config
+
+- name: Ensure odbcinst is correctly configured
+  sudo: yes
+  shell: dpkg-reconfigure -f noninteractive libmyodbc
+  tags:
+    - build
+    - config
+
