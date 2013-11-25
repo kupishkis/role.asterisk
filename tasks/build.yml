@@ -1,6 +1,6 @@
 ---
 #These tasks will try to execute building steps on items in $packages variable
-- name: Configure dependancies
+- name: Configure dependencies
   shell: "{{item.configure}} chdir={{item.dest}}"
   when: item.configure is defined
   with_items: $packages
@@ -12,7 +12,7 @@
 
 - name: Install packages from source
   sudo: true
-  shell: "{{item.install} chdir={{item.dest}}"
+  shell: "{{item.install}} chdir={{item.dest}}"
   when: item.install is defined
   with_items: $packages
 
