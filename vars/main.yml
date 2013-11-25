@@ -47,7 +47,7 @@ asterisk_packages:
 
   - name: asterisk
     vcs: subversion
-    url: http://svn.asterisk.org/svn/asterisk/trunk/12
+    url: http://svn.asterisk.org/svn/asterisk/trunk
     dest: "{{source_dir}}/asterisk"
     configure: ./configure --with-srtp --with-unixodbc --with-pjproject={{pjproject_prefix}}
     make: make

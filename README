@@ -1,0 +1,18 @@
+Ansible role for asterisk install.
+
+Note:
+Requires such variables present in calling playbook:
+[name]:           [default]
+data_dir:         /data
+source_dir:       "{{data_dir}}/source"
+cache_dir:        "{{data_dir}}/cache"
+
+asterisk_user:    asteriskbpx
+asterisk_group:   asteriskbpx
+
+asterisk_db_name
+asterisk_db_user
+asterisk_db_pass
+asterisk_db_host
+asterisk_db_port
+

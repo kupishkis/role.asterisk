@@ -1,10 +1,10 @@
 ---
 #Default user for asterisk install.
-asterisk_user: asteriskbpx
-asterisk_pass: #no password. User can only be used from the system.
+asterisk_user:      asteriskbpx
+asterisk_group:     asteriskbpx
 
 #Paths for source and cache
-data_dir:     /data/new
-source_dir:   "{{data_dir}}/source"
-cache_dir:    "{{data_dir}}/cache"
+data_dir:           /data
+source_dir:         "{{data_dir}}/source"
+cache_dir:          "{{data_dir}}/cache"
 
