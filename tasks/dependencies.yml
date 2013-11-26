@@ -1,0 +1,29 @@
+---
+- name: Ensure asterisk build dependancies are met
+  sudo: yes
+  apt: pkg={{item}} state=present
+  with_items:
+    - subversion
+    - libncurses5-dev
+    - libssl-dev
+    - libxml2-dev
+    - liblua5.2-dev
+    - lua5.2
+    - uuid-dev
+    - libjansson-dev
+    - libsqlite3-dev
+    - libsrtp0-dev
+    - srtp-utils
+    - mysql-server
+    - unixodbc-dev
+    - libmyodbc
+  tags:
+    - build
+
+- name: Ensure current kernel headers exist
+  sudo: yes
+  apt: pkg=linux-headers-{{ ansible_kernel }} state=latest
+  tags:
+    - build
+
+

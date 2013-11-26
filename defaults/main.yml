@@ -8,3 +8,36 @@ data_dir:           /data
 source_dir:         "{{data_dir}}/source"
 cache_dir:          "{{data_dir}}/cache"
 
+#Default configurations, that should be used if no other override is supplied:
+dahdi:
+  vcs: subversion
+  url: http://svn.asterisk.org/svn/dahdi/linux-complete/tags/2.6.1+2.6.1
+  dest: "{{source_dir}}/dahdi"
+  make: make
+  install: make install
+
+libpri:
+  vcs: subversion
+  url: http://svn.asterisk.org/svn/libpri/tags/1.4.14
+  dest: "{{source_dir}}/libpri"
+  make: make
+  install: make install && make config
+
+pjproject:
+  vcs: git
+  url: https://github.com/asterisk/pjproject
+  dest: "{{source_dir}}/pjproject"
+  prefix: /usr
+  version: master
+  configure: ./configure --with-external-srtp --prefix={{pjproject.prefix}} --enable-shared CFLAGS="-DNDEBUG"
+  make: make dep && NDEBUG=1 make
+  install: make install
+
+asterisk:
+  vcs: subversion
+  url: http://svn.asterisk.org/svn/asterisk/trunk
+  dest: "{{source_dir}}/asterisk"
+  configure: ./configure --with-srtp --with-unixodbc --with-pjproject={{pjproject.prefix}}
+  make: make
+  install: make install && make config
+

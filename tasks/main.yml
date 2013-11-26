@@ -1,16 +1,5 @@
 ---
-- name: Ensure asterisk build dependancies are met
-  sudo: yes
-  apt: pkg={{item}} state=present
-  with_items: packages
-  tags:
-    - build
-
-- name: Ensure current kernel headers exist
-  sudo: yes
-  apt: pkg=linux-headers-{{ ansible_kernel }} state=latest
-  tags:
-    - build
+- { include: dependencies.yml }
 
 - name: Ensure build directories exists
   sudo: yes
@@ -21,8 +10,15 @@
   tags:
     - build
 
-- { include: aquire.yml,  packages: $asterisk_packages, tags: [build] }
-- { include: build.yml,   packages: $asterisk_packages, tags: [build] }
+- { include: aquire.yml,  package: "{{libpri}}"    }
+- { include: aquire.yml,  package: "{{dahdi}}"     }
+- { include: aquire.yml,  package: "{{pjproject}}" }
+- { include: aquire.yml,  package: "{{asterisk}}"  }
+
+- { include: build.yml,   package: "{{libpri}}"    }
+- { include: build.yml,   package: "{{dahdi}}"     }
+- { include: build.yml,   package: "{{pjproject}}" }
+- { include: build.yml,   package: "{{asterisk}}"  }
 
 - name: Do ldconfig
   shell: sudo ldconfig

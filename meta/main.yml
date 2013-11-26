@@ -1,4 +1,4 @@
 ---
 dependencies:
-  - { role: ntp }
   - { role: build-essential }
+  - { role: ntp }

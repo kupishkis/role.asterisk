@@ -1,18 +1,21 @@
 ---
-#These tasks will try to execute building steps on items in $packages variable
+#These tasks will try to execute building steps on packages in $package variable
 - name: Configure dependencies
-  shell: "{{item.configure}} chdir={{item.dest}}"
-  when: item.configure is defined
-  with_items: $packages
+  shell: "{{package.configure}} chdir={{package.dest}}"
+  when: package.configure is defined
+  tags:
+    - build
 
 - name: Execute make commands
-  shell: "{{item.make}} chdir={{item.dest}}"
-  when: item.make is defined
-  with_items: $packages
+  shell: "{{package.make}} chdir={{package.dest}}"
+  when: package.make is defined
+  tags:
+    - build
 
 - name: Install packages from source
   sudo: true
-  shell: "{{item.install}} chdir={{item.dest}}"
-  when: item.install is defined
-  with_items: $packages
+  shell: "{{package.install}} chdir={{package.dest}}"
+  when: package.install is defined
+  tags:
+    - build
 
