@@ -10,13 +10,13 @@
   tags:
     - build
 
-- { include: aquire.yml,  package: "{{libpri}}"    }
 - { include: aquire.yml,  package: "{{dahdi}}"     }
+- { include: aquire.yml,  package: "{{libpri}}"    }
 - { include: aquire.yml,  package: "{{pjproject}}" }
 - { include: aquire.yml,  package: "{{asterisk}}"  }
 
-- { include: build.yml,   package: "{{libpri}}"    }
 - { include: build.yml,   package: "{{dahdi}}"     }
+- { include: build.yml,   package: "{{libpri}}"    }
 - { include: build.yml,   package: "{{pjproject}}" }
 - { include: build.yml,   package: "{{asterisk}}"  }
 
