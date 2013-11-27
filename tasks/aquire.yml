@@ -1,24 +1,27 @@
 ---
 # These tasks will try to aquire all packages listed in $package variable.
-- name: Obtain source using approprate vcs
+- name: Obtain source for {{package}}
+  debug: var=package
+
+- name: try vcs
   action: "{{package.vcs}} repo={{package.url}} dest={{package.dest}}"
   when: package.vcs is defined
   tags:
     - build
 
-- name: Obtain source by downloading a bundle and checking sha
+- name: try bundle with sha
   get_url: url={{package.url}} dest={{package.cache}} sha256sum={{package.sha}}
   when: package.bundle is defined and package.sha is defined
   tags:
     - build
 
-- name: Obtain source by downloading a bundle
+- name: try bundle
   get_url: url={{package.url}} dest={{package.cache}}
   when: package.bundle is defined
   tags:
     - build
 
-- name: Extract downloaded bundles
+- name: extract bundle
   unarchive: src={{package.cache}} dest={{package.dest}}
   when: package.bundle is defined
   tags:

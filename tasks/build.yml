@@ -1,18 +1,21 @@
 ---
 #These tasks will try to execute building steps on packages in $package variable
-- name: Configure dependencies
+- name: Build a package {{package}}
+  debug: var=package
+
+- name: configure
   shell: "{{package.configure}} chdir={{package.dest}}"
   when: package.configure is defined
   tags:
     - build
 
-- name: Execute make commands
+- name: make
   shell: "{{package.make}} chdir={{package.dest}}"
   when: package.make is defined
   tags:
     - build
 
-- name: Install packages from source
+- name: install
   sudo: true
   shell: "{{package.install}} chdir={{package.dest}}"
   when: package.install is defined
