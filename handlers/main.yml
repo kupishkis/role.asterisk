@@ -1,3 +1,6 @@
 ---
 - name: restart asterisk
   service: name=asterisk state=restarted
+
+- name: start asterisk
+  service: name=asterisk state=started
