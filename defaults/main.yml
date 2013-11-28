@@ -23,14 +23,12 @@ libpri:
   make: make
   install: make install
 
-pjproject_prefix: /usr
-
 pjproject:
   vcs: git
   url: https://github.com/asterisk/pjproject
   dest: "{{source_dir}}/pjproject"
   version: master
-  configure: ./configure --with-external-srtp --prefix={{pjproject_prefix}} --enable-shared CFLAGS="-DNDEBUG"
+  configure: ./configure --with-external-srtp --enable-shared CFLAGS="-DNDEBUG"
   make: make dep && NDEBUG=1 make
   install: make install
 
@@ -38,7 +36,7 @@ asterisk:
   vcs: subversion
   url: http://svn.asterisk.org/svn/asterisk/trunk
   dest: "{{source_dir}}/asterisk"
-  configure: ./configure --with-srtp --with-unixodbc --with-pjproject={{pjproject_prefix}}
+  configure: ./configure --with-srtp --with-unixodbc --with-pjproject=/usr/local && sed -i "/#undef HAVE_PJ_TRANSACTION_GRP_LOCK/c\#define HAVE_PJ_TRANSACTION_GRP_LOCK=1" include/asterisk/autoconfig.h
   make: make
   install: make install && make config
 
