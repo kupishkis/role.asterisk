@@ -1,0 +1,12 @@
+---
+- name: ensure python-pycurl exists
+  sudo: true
+  apt: pkg=python-pycurl state=latest
+
+- name: ensure backport sources exist
+  sudo: true
+  apt_repository: repo='deb http://ftp.lt.debian.org/debian wheezy-backports main' state=present update_cache=yes
+
+- name: ensure asterisk backport is installed
+  sudo: yes
+  apt: pkg=asterisk state=latest default_release=wheezy-backports

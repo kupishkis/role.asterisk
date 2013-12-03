@@ -1,35 +1,6 @@
 ---
-- { include: dependencies.yml }
-
-- name: Ensure build directories exists
-  sudo: yes
-  file: path={{item}} owner={{asterisk_user}} group={{asterisk_group}} recurse=yes state=directory
-  with_items:
-    - $source_dir
-    - $cache_dir
-  tags:
-    - build
-
-- { include: aquire.yml,  package: "{{dahdi}}"     }
-- { include: aquire.yml,  package: "{{libpri}}"    }
-- { include: aquire.yml,  package: "{{pjproject}}" }
-- { include: aquire.yml,  package: "{{asterisk}}"  }
-
-- { include: build.yml,   package: "{{dahdi}}"     }
-- { include: build.yml,   package: "{{libpri}}"    }
-- { include: build.yml,   package: "{{pjproject}}" }
-- { include: build.yml,   package: "{{asterisk}}"  }
-
-- name: Do ldconfig
-  shell: sudo ldconfig
-  tags:
-    - build
-
-- name: Fix DAHDI configs
-  sudo: yes
-  lineinfile: dest=/etc/udev/rules.d/dahdi.rules regexp="^SUBSYSTEM==\"dahdi\"" line="SUBSYSTEM==\"dahdi\", OWNER=\"{{asterisk_user}}\", GROUP=\"{{asterisk_group}}\", MODE=\"0660\"" state=present
-  tags:
-    - build
+# For now just preffer the package version
+- include: backport.yml
 
 - name: Ensure Asterisk directories exist
   sudo: yes
@@ -50,20 +21,3 @@
   notify: start asterisk
   tags:
     - build
-
-- name: Ensure odbc.ini is correct
-  sudo: yes
-  template: dest=/etc/{{item}} src={{item}}.j2
-  with_items:
-    - odbc.ini
-  tags:
-    - build
-    - config
-
-- name: Ensure odbcinst is correctly configured
-  sudo: yes
-  shell: dpkg-reconfigure -f noninteractive libmyodbc
-  tags:
-    - build
-    - config
-
