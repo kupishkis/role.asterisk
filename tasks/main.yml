@@ -1,6 +1,10 @@
 ---
 # For now just preffer the package version
 - include: backport.yml
+  when: asterisk_install_method=='backport'
+
+- include: source.yml
+  when: asterisk_install_method=='source'
 
 - name: Ensure Asterisk directories exist
   sudo: yes

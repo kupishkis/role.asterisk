@@ -3,8 +3,10 @@
 asterisk_user:      asteriskbpx
 asterisk_group:     asteriskbpx
 
+asterisk_install_method: source
+
 #Paths for source and cache
-data_dir:           /data
+data_dir:           "{{asterisk_dir}}"
 source_dir:         "{{data_dir}}/source"
 cache_dir:          "{{data_dir}}/cache"
 
@@ -37,6 +39,7 @@ asterisk:
   url: http://svn.asterisk.org/svn/asterisk/trunk
   dest: "{{source_dir}}/asterisk"
   configure: ./configure --with-srtp --with-unixodbc --with-pjproject=/usr/local && sed -i "/#undef HAVE_PJ_TRANSACTION_GRP_LOCK/c\#define HAVE_PJ_TRANSACTION_GRP_LOCK=1" include/asterisk/autoconfig.h
-  make: make
+    # include patching step
+  make: curl https://gist.github.com/xytis/7820491/raw | patch -p0 && make
   install: make install && make config
 
