@@ -18,6 +18,7 @@
     - mysql-server
     - unixodbc-dev
     - libmyodbc
+    - python-mysqldb
   tags:
     - build
 

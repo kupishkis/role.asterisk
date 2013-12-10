@@ -42,8 +42,14 @@
 
 - name: Ensure odbcinst is correctly configured
   sudo: yes
-  shell: dpkg-reconfigure -f noninteractive libmyodbc
+  shell: "echo -e \"Name: libmyodbc/addtoodbc\nTemplate: libmyodbc/addtoodbc\nValue: true\nOwners: libmyodbc, libmyodbc:amd64\nFlags: seen\" > /tmp/dpkg.conf && DEBCONF_DB_OVERRIDE='File{/tmp/dpkg.conf}' dpkg-reconfigure -fnoninteractive libmyodbc"
   tags:
     - build
     - config
+
+- name: Ensure db user exists
+  mysql_user: name={{asterisk_db_user}} password={{asterisk_db_pass}} priv='{{asterisk_db_name}}.*:all'
+
+- name: Ensure db exists
+  mysql_db: name={{asterisk_db_name}} encoding=utf8
 
