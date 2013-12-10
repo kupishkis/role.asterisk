@@ -42,7 +42,7 @@
 
 - name: Ensure odbcinst is correctly configured
   sudo: yes
-  shell: "echo -e \"Name: libmyodbc/addtoodbc\nTemplate: libmyodbc/addtoodbc\nValue: true\nOwners: libmyodbc, libmyodbc:amd64\nFlags: seen\" > /tmp/dpkg.conf && DEBCONF_DB_OVERRIDE='File{/tmp/dpkg.conf}' dpkg-reconfigure -fnoninteractive libmyodbc"
+  shell: "echo \"Name: libmyodbc/addtoodbc\nTemplate: libmyodbc/addtoodbc\nValue: true\nOwners: libmyodbc, libmyodbc:amd64\nFlags: seen\" > /tmp/dpkg.conf && DEBCONF_DB_OVERRIDE='File{/tmp/dpkg.conf}' dpkg-reconfigure -fnoninteractive libmyodbc"
   tags:
     - build
     - config
