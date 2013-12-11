@@ -15,7 +15,7 @@
     - /var/spool/asterisk
     - /var/log/asterisk
     - /var/run/asterisk
-    - /etc/asterisk
+    #- /etc/asterisk
   tags:
     - build
 
