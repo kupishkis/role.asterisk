@@ -47,7 +47,7 @@ asterisk:
   vcs: subversion
   url: http://svn.asterisk.org/svn/asterisk/tags/11.5.1
   dest: "{{source_dir}}/asterisk"
-  configure: ./configure --with-srtp --with-unixodbc
+  configure: echo "export CFLAGS= -DNDEBUG" > res/pjproject/user.mak && ./configure --with-srtp --with-unixodbc
     # include patching step
   make: curl https://gist.github.com/xytis/7820491/raw | patch -p0 && make
   install: make install && make config
