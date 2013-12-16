@@ -1,7 +1,7 @@
 ---
 #Default user for asterisk install.
-asterisk_user:      asteriskbpx
-asterisk_group:     asteriskbpx
+asterisk_user:      asterisk
+asterisk_group:     asterisk
 
 asterisk_install_method: source
 
