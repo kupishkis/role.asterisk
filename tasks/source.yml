@@ -48,7 +48,7 @@
     - config
 
 - name: Ensure db user exists
-  mysql_user: name={{asterisk_db_user}} password={{asterisk_db_pass}} priv='{{asterisk_db_name}}.*:all'
+  mysql_user: name={{asterisk_db_user}} password={{asterisk_db_pass}} priv='{{asterisk_db_name}}.*:all' host={{asterisk_db_scope}}
 
 - name: Ensure db exists
   mysql_db: name={{asterisk_db_name}} encoding=utf8
