@@ -5,8 +5,8 @@
   sudo: yes
   file: path={{item}} owner={{asterisk_user}} group={{asterisk_group}} recurse=yes state=directory
   with_items:
-    - $source_dir
-    - $cache_dir
+    - '{{source_dir}}'
+    - '{{cache_dir}}'
   tags:
     - build
 

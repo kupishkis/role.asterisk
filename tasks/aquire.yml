@@ -1,28 +1,38 @@
 ---
-# These tasks will try to aquire all packages listed in $package variable.
+# These tasks will try to aquire all packages listed in {{package}} variable.
 - name: Obtain source for {{package}}
   debug: var=package
 
 - name: try vcs
-  action: "{{package.vcs}} repo={{package.url}} dest={{package.dest}}"
+  action: >
+    {{package.vcs}}
+    repo={{package.url}}
+    dest={{package.dest}}
   when: package.vcs is defined
   tags:
     - build
 
 - name: try bundle with sha
-  get_url: url={{package.url}} dest={{package.cache}} sha256sum={{package.sha}}
+  get_url: >
+    url={{package.url}}
+    dest={{package.cache}}
+    sha256sum={{package.sha}}
   when: package.bundle is defined and package.sha is defined
   tags:
     - build
 
 - name: try bundle
-  get_url: url={{package.url}} dest={{package.cache}}
+  get_url: >
+    url={{package.url}}
+    dest={{package.cache}}
   when: package.bundle is defined
   tags:
     - build
 
 - name: extract bundle
-  unarchive: src={{package.cache}} dest={{package.dest}}
+  unarchive: >
+    src={{package.cache}}
+    dest={{package.dest}}
   when: package.bundle is defined
   tags:
     - build

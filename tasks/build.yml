@@ -1,5 +1,4 @@
 ---
-#These tasks will try to execute building steps on packages in $package variable
 - name: Build a package {{package}}
   debug: var=package
 
@@ -21,4 +20,3 @@
   when: package.install is defined
   tags:
     - build
-
