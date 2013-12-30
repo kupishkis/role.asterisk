@@ -20,6 +20,22 @@
 - { include: build.yml,   package: "{{pjproject}}" }
 - { include: build.yml,   package: "{{asterisk}}"  }
 
+- name: enable all required music packages
+  shell: >
+    ./menuselect/menuselect --enable {{item}}
+    chdir={{asterisk.dest}}
+  with_items: asterisk.music
+  tags:
+    - music
+
+- name: download music packages
+  sudo: yes
+  shell: >
+    make install
+    chdir={{asterisk.dest}}
+  tags:
+    - music
+
 - name: Fix DAHDI configs
   sudo: yes
   lineinfile: dest=/etc/udev/rules.d/dahdi.rules regexp="^SUBSYSTEM==\"dahdi\"" line="SUBSYSTEM==\"dahdi\", OWNER=\"{{asterisk_user}}\", GROUP=\"{{asterisk_group}}\", MODE=\"0660\"" state=present
