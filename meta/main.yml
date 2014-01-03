@@ -2,3 +2,6 @@
 dependencies:
   - { role: build-essential }
   - { role: ntp }
+  - role: packages
+    packages:
+      - wget
