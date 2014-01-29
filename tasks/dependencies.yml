@@ -15,7 +15,6 @@
     - libsqlite3-dev
     - libsrtp0-dev
     - srtp-utils
-    - mysql-server
     - unixodbc-dev
     - libmyodbc
     - python-mysqldb
