@@ -1,0 +1,8 @@
+---
+- name: ensure python-pycurl exists
+  sudo: true
+  apt: pkg=python-pycurl state=present
+
+- name: ensure asterisk is installed
+  sudo: yes
+  apt: pkg=asterisk state=latest

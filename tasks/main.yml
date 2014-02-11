@@ -6,6 +6,9 @@
 - include: source.yml
   when: asterisk_install_method=='source'
 
+- include: package.yml
+  when: asterisk_install_method=='package'
+
 - name: Ensure Asterisk directories exist
   sudo: yes
   file: path={{item}} state=directory owner={{asterisk_user}} group={{asterisk_group}} recurse=yes
@@ -15,13 +18,13 @@
     - /var/spool/asterisk
     - /var/log/asterisk
     - /var/run/asterisk
-    #- /etc/asterisk
+    - /etc/asterisk
   tags:
     - build
 
 - name: Ensure asterisk is executable
   sudo: yes
-  file: path=/usr/sbin/asterisk state=file owner={{asterisk_user}} group={{asterisk_group}}
+  file: path=/usr/local/bin/asterisk src=/usr/sbin/asterisk state=link owner={{asterisk_user}} group={{asterisk_group}}
   notify: start asterisk
   tags:
     - build
