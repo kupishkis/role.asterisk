@@ -54,8 +54,8 @@ asterisk:
   dest: "{{source_dir}}/asterisk"
   configure: >
     echo "export CFLAGS+= -DNDEBUG" > res/pjproject/user.mak &&
-    ./configure --with-srtp --with-unixodbc &&
-    curl https://gist.github.com/xytis/7820491/raw | patch -p0
+    ./configure --with-srtp --with-unixodbc #&&
+    #curl https://gist.github.com/xytis/7820491/raw | patch -p0
   make: make
   install: make install && make config
   music:
