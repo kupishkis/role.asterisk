@@ -25,32 +25,9 @@ libpri:
   make: make
   install: make install
 
-#pjproject:
-#  vcs: git
-#  url: https://github.com/asterisk/pjproject
-#  dest: "{{source_dir}}/pjproject"
-#  version: master
-#  configure: ./configure --with-external-srtp --enable-shared CFLAGS="-DNDEBUG"
-#  make: make dep && NDEBUG=1 make
-#  install: make install
-#
-#asterisk:
-#  vcs: subversion
-#  url: http://svn.asterisk.org/svn/asterisk/trunk
-#  dest: "{{source_dir}}/asterisk"
-#  configure: ./configure --with-srtp --with-unixodbc --with-pjproject=/usr/local && sed -i "/#undef HAVE_PJ_TRANSACTION_GRP_LOCK/c\#define HAVE_PJ_TRANSACTION_GRP_LOCK=1" include/asterisk/autoconfig.h
-#    # include patching step
-#  make: curl https://gist.github.com/xytis/7820491/raw | patch -p0 && make
-#  install: make install && make config
-
-# Add these lines somewhere...
-#sed -i 's/MENUSELECT_EXTRA_SOUNDS.*/MENUSELECT_EXTRA_SOUNDS=EXTRA-SOUNDS-EN-WAV EXTRA-SOUNDS-EN-ULAW EXTRA-SOUNDS-EN-ALAW EXTRA-SOUNDS-EN-GSM/' menuselect.makeopts &&
-#sed -i 's/MENUSELECT_CORE_SOUNDS.*/MENUSELECT_CORE_SOUNDS=CORE-SOUNDS-EN-WAV CORE-SOUNDS-EN-ULAW CORE-SOUNDS-EN-ALAW CORE-SOUNDS-EN-GSM/' menuselect.makeopts &&
-#sed -i 's/MENUSELECT_MOH.*/MENUSELECT_MOH=MOH-OPSOUND-WAV MOH-OPSOUND-ULAW MOH-OPSOUND-ALAW MOH-OPSOUND-GSM/' menuselect.makeopts &&
-
 asterisk:
   vcs: subversion
-  url: http://svn.asterisk.org/svn/asterisk/tags/12.1.0-rc1/
+  url: http://svn.asterisk.org/svn/asterisk/tags/11.8.0-rc1/
   dest: "{{source_dir}}/asterisk"
   configure: >
     echo "export CFLAGS+= -DNDEBUG" > res/pjproject/user.mak &&
