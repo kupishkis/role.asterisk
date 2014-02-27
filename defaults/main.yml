@@ -50,7 +50,7 @@ libpri:
 
 asterisk:
   vcs: subversion
-  url: http://svn.asterisk.org/svn/asterisk/tags/11.5.1
+  url: http://svn.asterisk.org/svn/asterisk/tags/12.1.0-rc1/
   dest: "{{source_dir}}/asterisk"
   configure: >
     echo "export CFLAGS+= -DNDEBUG" > res/pjproject/user.mak &&
