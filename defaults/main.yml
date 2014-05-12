@@ -11,29 +11,17 @@ source_dir:         "{{data_dir}}/source"
 cache_dir:          "{{data_dir}}/cache"
 
 #Default configurations, that should be used if no other override is supplied:
-dahdi:
-  vcs: subversion
-  url: http://svn.asterisk.org/svn/dahdi/linux-complete/tags/2.6.1+2.6.1
-  dest: "{{source_dir}}/dahdi"
-  make: make
-  install: make install && make config
-
-libpri:
-  vcs: subversion
-  url: http://svn.asterisk.org/svn/libpri/tags/1.4.14
-  dest: "{{source_dir}}/libpri"
-  make: make
-  install: make install
-
 asterisk:
   vcs: subversion
-  url: http://svn.asterisk.org/svn/asterisk/tags/11.8.0-rc1/
+  url: http://svn.asterisk.org/svn/asterisk/tags/11.10.2/
   dest: "{{source_dir}}/asterisk"
   configure: >
     echo "export CFLAGS+= -DNDEBUG" > res/pjproject/user.mak &&
-    ./configure --with-srtp --with-unixodbc #&&
-    #curl https://gist.github.com/xytis/7820491/raw | patch -p0
-  make: make
+    make distclean;
+    ./configure --with-srtp --with-unixodbc --with-crypto --with-ssl &&
+    curl https://gist.githubusercontent.com/xytis/eba26d288db5fa20f0ca/raw/asterisk.patch | patch -p0 &&
+    curl https://gist.githubusercontent.com/virmis/4bcacfbbc02651143dea/raw/menuselect%20opts > menuselect.makeopts
+  make: make #asterisk fails with parallel builds
   install: make install && make config
   music:
     - EXTRA-SOUNDS-EN-WAV
