@@ -10,14 +10,14 @@
   tags:
     - build
 
-- { include: aquire.yml,  package: "{{dahdi}}"     }
-- { include: aquire.yml,  package: "{{libpri}}"    }
-- { include: aquire.yml,  package: "{{pjproject}}" }
+#- { include: aquire.yml,  package: "{{dahdi}}"     }
+#- { include: aquire.yml,  package: "{{libpri}}"    }
+#- { include: aquire.yml,  package: "{{pjproject}}" }
 - { include: aquire.yml,  package: "{{asterisk}}"  }
 
-- { include: build.yml,   package: "{{dahdi}}"     }
-- { include: build.yml,   package: "{{libpri}}"    }
-- { include: build.yml,   package: "{{pjproject}}" }
+#- { include: build.yml,   package: "{{dahdi}}"     }
+#- { include: build.yml,   package: "{{libpri}}"    }
+#- { include: build.yml,   package: "{{pjproject}}" }
 - { include: build.yml,   package: "{{asterisk}}"  }
 
 - name: enable all required music packages
@@ -43,11 +43,11 @@
   tags:
     - build
 
-- name: Fix DAHDI configs
-  sudo: yes
-  lineinfile: dest=/etc/udev/rules.d/dahdi.rules regexp="^SUBSYSTEM==\"dahdi\"" line="SUBSYSTEM==\"dahdi\", OWNER=\"{{asterisk_user}}\", GROUP=\"{{asterisk_group}}\", MODE=\"0660\"" state=present
-  tags:
-    - build
+#- name: Fix DAHDI configs
+#  sudo: yes
+#  lineinfile: dest=/etc/udev/rules.d/dahdi.rules regexp="^SUBSYSTEM==\"dahdi\"" line="SUBSYSTEM==\"dahdi\", OWNER=\"{{asterisk_user}}\", GROUP=\"{{asterisk_group}}\", MODE=\"0660\"" state=present
+#  tags:
+#    - build
 
 - name: Do ldconfig
   shell: sudo ldconfig

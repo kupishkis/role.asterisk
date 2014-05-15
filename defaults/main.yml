@@ -11,19 +11,19 @@ source_dir:         "{{data_dir}}/source"
 cache_dir:          "{{data_dir}}/cache"
 
 #Default configurations, that should be used if no other override is supplied:
-dahdi:
-  vcs: subversion
-  url: http://svn.asterisk.org/svn/dahdi/linux-complete/tags/2.6.1+2.6.1
-  dest: "{{source_dir}}/dahdi"
-  make: make
-  install: make install && make config
+#dahdi:
+#  vcs: subversion
+#  url: http://svn.asterisk.org/svn/dahdi/linux-complete/tags/2.6.1+2.6.1
+#  dest: "{{source_dir}}/dahdi"
+#  make: make
+#  install: make install && make config
 
-libpri:
-  vcs: subversion
-  url: http://svn.asterisk.org/svn/libpri/tags/1.4.14
-  dest: "{{source_dir}}/libpri"
-  make: make
-  install: make install
+#libpri:
+#  vcs: subversion
+#  url: http://svn.asterisk.org/svn/libpri/tags/1.4.14
+#  dest: "{{source_dir}}/libpri"
+#  make: make
+#  install: make install
 
 asterisk:
   vcs: subversion
