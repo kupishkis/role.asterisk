@@ -27,7 +27,7 @@ cache_dir:          "{{data_dir}}/cache"
 
 asterisk:
   vcs: subversion
-  url: http://svn.asterisk.org/svn/asterisk/tags/11.9.0/
+  url: http://svn.asterisk.org/svn/asterisk/tags/11.10.0/
   dest: "{{source_dir}}/asterisk"
   configure: >
     echo "export CFLAGS+= -DNDEBUG" > res/pjproject/user.mak &&
