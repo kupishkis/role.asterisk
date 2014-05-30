@@ -33,7 +33,7 @@ asterisk:
     echo "export CFLAGS+= -DNDEBUG" > res/pjproject/user.mak &&
     ./configure --with-srtp --with-unixodbc --with-crypto --with-ssl #&&
     #curl https://gist.github.com/xytis/7820491/raw | patch -p0
-  make: make
+  make: "make -j `cat /proc/cpuinfo | grep processor | wc -l`"
   install: make install && make config
   music:
     - EXTRA-SOUNDS-EN-WAV
