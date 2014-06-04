@@ -21,10 +21,10 @@
   tags:
     - build
 
-- name: Ensure current kernel headers exist
-  sudo: yes
-  apt: pkg=linux-headers-{{ ansible_kernel }} state=latest
-  tags:
-    - build
-
+#- name: Ensure current kernel headers exist
+#  sudo: yes
+#  apt: pkg=linux-headers-{{ ansible_kernel }} state=latest
+#  tags:
+#    - build
+#
 
