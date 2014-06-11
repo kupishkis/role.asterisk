@@ -31,8 +31,8 @@ asterisk:
   dest: "{{source_dir}}/asterisk"
   configure: >
     echo "export CFLAGS+= -DNDEBUG" > res/pjproject/user.mak &&
-    ./configure --with-srtp --with-unixodbc --with-crypto --with-ssl &&
-    curl https://gist.githubusercontent.com/xytis/cd00a2938f91424aa41c/raw/dtls_hack_enable_sha256.patch | patch -p0
+    ./configure --with-srtp --with-unixodbc --with-crypto --with-ssl
+    #curl https://gist.githubusercontent.com/xytis/cd00a2938f91424aa41c/raw/dtls_hack_enable_sha256.patch | patch -p0
   make: "make -j `cat /proc/cpuinfo | grep processor | wc -l`"
   install: make install && make config
   music:
