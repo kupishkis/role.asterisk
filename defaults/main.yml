@@ -32,9 +32,9 @@ asterisk:
   configure: >
     echo "export CFLAGS+= -DNDEBUG" > res/pjproject/user.mak &&
     ./configure --with-srtp --with-unixodbc --with-crypto --with-ssl &&
-    curl https://gist.githubusercontent.com/xytis/b1385479f9ed72beae39/raw/hackfix_rtcp_deadlock.patch | patch -p0
-  #make: "make -j `cat /proc/cpuinfo | grep processor | wc -l`"
-  make: "make" #asterisk fails with parallel builds
+    curl http://pkg.callcenter.lamoda.ru/patches/asterisk-11.10.0-dtls-x4.patch | patch -p0
+    #make: "make -j `cat /proc/cpuinfo | grep processor | wc -l`"
+    make: "make" #asterisk fails with parallel builds
   install: make install && make config
   music:
     - EXTRA-SOUNDS-EN-WAV
