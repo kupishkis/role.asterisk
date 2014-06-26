@@ -23,17 +23,3 @@ asterisk:
     curl https://gist.githubusercontent.com/virmis/4bcacfbbc02651143dea/raw/menuselect%20opts > menuselect.makeopts
   make: make #asterisk fails with parallel builds
   install: make install && make config
-  music:
-    - EXTRA-SOUNDS-EN-WAV
-    - EXTRA-SOUNDS-EN-ULAW
-    - EXTRA-SOUNDS-EN-ALAW
-    - EXTRA-SOUNDS-EN-GSM
-    - CORE-SOUNDS-EN-WAV
-    - CORE-SOUNDS-EN-ULAW
-    - CORE-SOUNDS-EN-ALAW
-    - CORE-SOUNDS-EN-GSM
-    - MOH-OPSOUND-WAV
-    - MOH-OPSOUND-ULAW
-    - MOH-OPSOUND-ALAW
-    - MOH-OPSOUND-GSM
-
