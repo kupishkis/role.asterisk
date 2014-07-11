@@ -18,6 +18,11 @@
     - unixodbc-dev
     - libmyodbc
     - python-mysqldb
+    - binutils-dev
+    - libvorbis-dev
+    - libogg-dev
+    - vorbis-tools
+    - sox
   tags:
     - build
 

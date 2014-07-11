@@ -20,6 +20,6 @@ asterisk:
     make distclean;
     ./configure --with-srtp --with-unixodbc --with-crypto --with-ssl &&
     curl https://gist.githubusercontent.com/xytis/eba26d288db5fa20f0ca/raw/asterisk.patch | patch -p0 &&
-    curl https://gist.githubusercontent.com/virmis/4bcacfbbc02651143dea/raw/menuselect%20opts > menuselect.makeopts
+    curl https://gist.githubusercontent.com/virmis/4bcacfbbc02651143dea/raw/menuselect.makeopts  > menuselect.makeopts
   make: make #asterisk fails with parallel builds
   install: make install && make config
