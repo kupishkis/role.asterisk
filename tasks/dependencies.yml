@@ -20,6 +20,25 @@
     - python-mysqldb
   tags:
     - build
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Ensure asterisk build dependancies are met
+  sudo: yes
+  yum: name={{item}} state=present
+  with_items:
+    - subversion
+    - git
+    - ncurses-devel
+    - openssl-devel
+    - libxml2-devel
+    - uuid-devel
+    - sqlite-devel
+    - unixODBC-devel
+    - mysql-connector-odbc
+    - libtool-ltdl-devel
+  tags:
+    - build
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 
 #- name: Ensure current kernel headers exist
 #  sudo: yes
