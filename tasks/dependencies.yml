@@ -23,6 +23,7 @@
     - libogg-dev
     - vorbis-tools
     - sox
+    - libcurl4-gnutls-dev
   tags:
     - build
 
